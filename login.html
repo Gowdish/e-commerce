@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iLooks Login | Ernakulam</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center min-h-screen px-4">
+    <div class="bg-white shadow-xl rounded-2xl w-full max-w-md p-8">
+      <h2 class="text-3xl font-bold text-blue-700 text-center mb-6">iLooks Login</h2>
+
+      <form class="space-y-5">
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <!-- Forgot Password + Verify Email -->
+        <div class="flex justify-between text-sm text-blue-600 font-medium">
+          <a href="#" class="hover:underline">Forgot Password?</a>
+          <a href="#" class="hover:underline">Verify Email</a>
+        </div>
+
+        <!-- Login Button -->
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+        >
+          Login
+        </button>
+
+        <!-- OR Divider -->
+        <div class="text-center text-gray-400 text-sm relative my-4">
+          <span class="bg-white px-2 relative z-10">or</span>
+          <div class="absolute top-1/2 left-0 right-0 h-px bg-gray-200 z-0"></div>
+        </div>
+
+        <!-- Google Login -->
+        <button
+          type="button"
+          class="w-full border border-gray-300 flex items-center justify-center gap-2 py-3 rounded-lg font-semibold text-gray-700 hover:bg-gray-50"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M224,128a96,96,0,1,1-21.95-61.09,8,8,0,1,1-12.33,10.18A80,80,0,1,0,207.6,136H128a8,8,0,0,1,0-16h88A8,8,0,0,1,224,128Z"></path>
+          </svg>
+          Login with Google
+        </button>
+
+        <!-- New Registration -->
+        <p class="text-center text-sm text-gray-600 mt-5">
+          New to iLooks?
+          <a href="#" class="text-blue-600 font-semibold hover:underline">Create an account</a>
+        </p>
+      </form>
+    </div>
+  </body>
+</html>

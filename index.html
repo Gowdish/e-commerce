@@ -1,0 +1,439 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800"
+    />
+    <title>I Looks</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      .carousel::-webkit-scrollbar { display: none; }
+      .carousel { -ms-overflow-style: none; scrollbar-width: none; }
+      /* Fix header at the very top, make body content scroll under it */
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .fixed-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+      }
+      .main-content-with-header {
+        margin-top: 72px; /* Adjust this value to match header height */
+      }
+      @media (max-width: 640px) {
+        .main-content-with-header {
+          margin-top: 110px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Fixed Header -->
+    <header class="fixed-header flex items-center justify-between border-b border-solid border-b-[#f4f1f1] px-10 py-3 bg-black shadow-sm">
+      <div class="flex gap-4 text-[##f5f5f5]">
+        <div class="size-4 text-white">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+          </svg>
+        </div>
+        <h2 class="text-[#f5f5f5] text-lg font-bold leading-tight tracking-[-0.015em]">I Looks</h2>
+      </div>
+      <div class="flex flex-1 justify-end gap-8">
+        <div class="flex items-center gap-9">
+          <a class="text-[#f5f5f5] text-sm font-medium leading-normal" href="newarrivals.html">New Arrivals</a>
+          <a class="text-[#f5f5f5] text-sm font-medium leading-normal" href="men.html">Men</a>
+          <a class="text-[#f5f5f5] text-sm font-medium leading-normal" href="women.html">Women</a>
+          <a class="text-[#f5f5f5] text-sm font-medium leading-normal" href="sales.html">Sale</a>
+        </div>
+        <div class="flex gap-2">
+          <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+            <a class="truncate" href="login.html">Login</a>
+          </button>
+          <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f4f1f1] text-[#171212] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+            <div class="text-[#171212]" data-icon="MagnifyingGlass" data-size="20px" data-weight="regular">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+              </svg>
+            </div>
+          </button>
+          <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f4f1f1] text-[#171212] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+            <div class="text-[#171212]" data-icon="ShoppingBag" data-size="20px" data-weight="regular">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200ZM176,88a48,48,0,0,1-96,0,8,8,0,0,1,16,0,32,32,0,0,0,64,0,8,8,0,0,1,16,0Z"></path>
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+    </header>
+        <!-- Main Content -->
+        <main class="flex-1 w-full bg-[#f8fafc]">
+          <div class="mx-auto max-w-[1200px] px-4 py-8">
+            <!-- Carousel Start -->
+            <div class="relative w-full overflow-hidden rounded-2xl mb-12 shadow-lg">
+              <div id="carousel" class="carousel flex transition-transform duration-700 ease-in-out" style="scroll-behavior: smooth;">
+                <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80" alt="Fashion 1" class="w-full h-[400px] object-cover flex-shrink-0 rounded-2xl" />
+                <img src="../e-commerce/static/images/indian-men-latest-fashion-shirts-in-display-retail-shop-in-market-traditional-wear-for-men-india-2MMKBP4.jpg" alt="Fashion 2" class="w-full h-[400px] object-cover flex-shrink-0 rounded-2xl" />
+                <img src="../e-commerce/static/images/indeximage2.jpg" alt="Fashion 3" class="w-full h-[400px] object-cover flex-shrink-0 rounded-2xl" />
+                <img src="../e-commerce/static/images/indeimage3.webp" alt="Fashion 4" class="w-full h-[400px] object-cover flex-shrink-0 rounded-2xl" />
+                <img src="../e-commerce/static/images/index-5.jpg" alt="Fashion 5" class="w-full h-[400px] object-cover flex-shrink-0 rounded-2xl" />
+              </div>
+              <!-- Carousel Controls -->
+              <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow" aria-label="Previous">
+                <svg width="28" height="28" fill="none" stroke="#171212" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow" aria-label="Next">
+                <svg width="28" height="28" fill="none" stroke="#171212" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+            <script>
+              // Responsive JS Carousel
+              const carousel = document.getElementById('carousel');
+              const images = carousel.querySelectorAll('img');
+              let currentIndex = 0;
+              function showImage(index) {
+                carousel.style.transform = `translateX(-${index * 100}%)`;
+              }
+              document.getElementById('prevBtn').onclick = function() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+              };
+              document.getElementById('nextBtn').onclick = function() {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+              };
+              // Auto-slide
+              setInterval(() => {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+              }, 3500);
+            </script>
+            <!-- Carousel End -->
+
+            <!-- Shop by Category -->
+            <h2 class="text-[#171212] text-[26px] font-bold leading-tight tracking-[-0.015em] px-2 pb-3 pt-2">Shop by Category</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 p-4">
+              <div class="flex flex-col gap-3 pb-3">
+                <a href="men.html" class="group block">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-[4/3] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group-hover:scale-105 group-hover:shadow-xl"
+                    style='background-image: url("../e-commerce/static/images/men_img.jpg");'
+                  ></div>
+                </a>
+                <p class="text-[#171212] text-lg font-semibold leading-normal text-center">Men's Collection</p>
+              </div>
+              <div class="flex flex-col gap-3 pb-3">
+                <a href="women.html" class="group block">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-[4/3] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl group-hover:scale-105 group-hover:shadow-xl"
+                    style='background-image: url("../e-commerce/static/images/women.jpg");'
+                  ></div>
+                </a>
+                <p class="text-[#171212] text-lg font-semibold leading-normal text-center">Women's Collection</p>
+              </div>
+            </div>
+
+            <!-- Space between sections -->
+            <div class="h-10"></div>
+
+            <!-- Featured Products -->
+            <h2 class="text-[#171212] text-[26px] font-bold leading-tight tracking-[-0.015em] px-2 pb-3 pt-2">Featured Products</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 p-4">
+              <!-- Product 1: View Details for Casual Shirt -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Casual Shirt</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">₹899 <span class="line-through text-gray-400 ml-2">₹1200</span></p>
+                  </div>
+                  <a href="men_productdetail.html?id=men_shirt_1" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-blue-600 text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-blue-700 transition">
+                    <span class="truncate">View Details</span>
+                  </a>
+                </div>
+              </div>
+              <!-- Product 2 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/summerdress.jpg");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Summer Dress</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$79.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Product 3 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/pant.jpg");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">pants</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$29.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Product 4 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Denim Jacket</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$89.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Product 5 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/kurthas.jpg");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Kurthas</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$119.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Product 6 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/churidar.jpg");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">churidar</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$69.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Product 7 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/e-commerce.jpg");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Gowns</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$39.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Product 8 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Shirts</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$89.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Product 9 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/pants_women.jpg");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">pants </p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$19.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Space between sections -->
+            <div class="h-10"></div>
+
+            <!-- Top Sellers -->
+            <h2 class="text-[#171212] text-[26px] font-bold leading-tight tracking-[-0.015em] px-2 pb-3 pt-2">Top Sellers</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 p-4">
+              <!-- Seller 1 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/suit_men.jpg");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Formal Suit</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$199.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Seller 2 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Evening Gown</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$249.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Seller 3 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/tshirt.jpg");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Tshirts</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$39.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Seller 4 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/cottonkurta.jpg");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Cotton Kurta</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$59.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Seller 5 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/saree.jpg");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Saree</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$129.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Seller 6 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/lace.jpg");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Lace</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$69.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Seller 7 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/partywear.webp");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">partywear</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$39.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+              <!-- Seller 8 -->
+              <div class="flex flex-col gap-4 rounded-xl bg-white shadow-lg min-w-60">
+                <div class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  style='background-image: url("../e-commerce/static/images/lehenga.webp");'></div>
+                <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-2">
+                  <div>
+                    <p class="text-[#171212] text-base font-medium leading-normal">Lehenga</p>
+                    <p class="text-[#82686a] text-sm font-normal leading-normal">$119.99</p>
+                  </div>
+                  <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f4f1f1] text-[#171212] text-sm font-bold leading-normal tracking-[0.015em]">
+                    <span class="truncate">Buy now</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- End main content -->
+          </div>
+        </main>
+        <!-- Footer -->
+        <footer class="bg-[#171212] text-white mt-12">
+          <div class="max-w-[1200px] mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <h3 class="text-lg font-bold mb-3">I Looks</h3>
+              <p class="text-sm text-gray-300 mb-2">Your one-stop shop for the latest fashion trends and accessories. Quality and style, delivered to your door.</p>
+              <p class="text-xs text-gray-400">&copy; 2025 I Looks. All rights reserved.</p>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-2">Shop</h4>
+              <ul class="space-y-1 text-sm">
+                <li><a href="men.html" class="hover:underline">Men</a></li>
+                <li><a href="women.html" class="hover:underline">Women</a></li>
+                <li><a href="accessories.html" class="hover:underline">Accessories</a></li>
+                <li><a href="sales.html" class="hover:underline">Sale</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-2">Customer Service</h4>
+              <ul class="space-y-1 text-sm">
+                <li><a href="#" class="hover:underline">Contact Us</a></li>
+                <li><a href="#" class="hover:underline">Shipping</a></li>
+                <li><a href="#" class="hover:underline">Returns</a></li>
+                <li><a href="#" class="hover:underline">FAQs</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-2">Follow Us</h4>
+              <div class="flex gap-3 mt-2">
+                <a href="#" aria-label="Instagram" class="hover:text-[#f4f1f1]"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.75a5.75 5.75 0 1 1-5.75 5.75A5.75 5.75 0 0 1 12 6.25zm0 1.5a4.25 4.25 0 1 0 4.25 4.25A4.25 4.25 0 0 0 12 7.75zm5.5-.75a1 1 0 1 1-1 1a1 1 0 0 1 1-1z"/></svg></a>
+                <a href="#" aria-label="Facebook" class="hover:text-[#f4f1f1]"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.05h-2.1v-2.9h2.1V9.5c0-2.07 1.23-3.22 3.12-3.22c.9 0 1.84.16 1.84.16v2.02h-1.04c-1.03 0-1.35.64-1.35 1.3v1.56h2.3l-.37 2.9h-1.93v7.05A10 10 0 0 0 22 12z"/></svg></a>
+                <a href="#" aria-label="Twitter" class="hover:text-[#f4f1f1]"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 5.92a8.19 8.19 0 0 1-2.36.65a4.13 4.13 0 0 0 1.81-2.27a8.28 8.28 0 0 1-2.61 1a4.13 4.13 0 0 0-7.04 3.76A11.7 11.7 0 0 1 3.1 4.86a4.13 4.13 0 0 0 1.28 5.51a4.07 4.07 0 0 1-1.87-.52v.05a4.13 4.13 0 0 0 3.31 4.05a4.09 4.09 0 0 1-1.86.07a4.13 4.13 0 0 0 3.85 2.86A8.29 8.29 0 0 1 2 19.54a11.7 11.7 0 0 0 6.29 1.84c7.55 0 11.69-6.26 11.69-11.69c0-.18 0-.36-.01-.54A8.18 8.18 0 0 0 22 5.92z"/></svg></a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

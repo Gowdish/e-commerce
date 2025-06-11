@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iLooks - Men's Fashion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../e-commerce/static/css/men_style.css">
+</head>
+<body>
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="close-cart" id="closeCart">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="btn btn-primary checkout-btn" id="checkoutBtn" disabled onclick="proceedToCheckout()">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Product added to cart successfully!
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <h1><a href="#" style="color: #3498db; text-decoration: none;">iLooks</a></h1>
+                <p>Men's Fashion</p>
+            </div>
+            <nav class="nav-menu">
+                <a href="#tshirts">T-Shirts</a>
+                <a href="#shirts">Shirts</a>
+                <a href="#jeans">Jeans</a>
+                <a href="#trousers">Trousers</a>
+                <a href="#blazers">Blazers</a>
+                <a href="#suits">Suits</a>
+                <a href="#traditional">Traditional</a>
+                <a href="#activewear">Activewear</a>
+                <a href="#footwear">Footwear</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search products..." id="searchInput">
+                </div>
+                <div class="cart-icon" id="cartIcon">
+                    <span class="cart-count" id="cartCount">0</span>
+                    🛍️
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="hero-section">
+                <h2>Elevate Your Style Game</h2>
+                <p>Explore our premium collection of men's clothing and accessories</p>
+            </div>
+
+            <div class="layout">
+                <!-- Filters Sidebar -->
+                <aside class="filters">
+                    <h3>Filters</h3>
+                    
+                    <div class="filter-group">
+                        <h4>Category</h4>
+                        <label><input type="checkbox" name="category" value="tshirts"> T-Shirts</label>
+                        <label><input type="checkbox" name="category" value="shirts"> Shirts</label>
+                        <label><input type="checkbox" name="category" value="jeans"> Jeans</label>
+                        <label><input type="checkbox" name="category" value="trousers"> Trousers</label>
+                        <label><input type="checkbox" name="category" value="blazers"> Blazers</label>
+                        <label><input type="checkbox" name="category" value="suits"> Suits</label>
+                        <label><input type="checkbox" name="category" value="traditional"> Traditional Wear</label>
+                        <label><input type="checkbox" name="category" value="activewear"> Activewear</label>
+                        <label><input type="checkbox" name="category" value="footwear"> Footwear</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Price Range</h4>
+                        <label><input type="radio" name="price" value="0-1000"> Under ₹1000</label>
+                        <label><input type="radio" name="price" value="1000-2000"> ₹1000 - ₹2000</label>
+                        <label><input type="radio" name="price" value="2000-5000"> ₹2000 - ₹5000</label>
+                        <label><input type="radio" name="price" value="5000+"> Above ₹5000</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Size</h4>
+                        <label><input type="checkbox" name="size" value="S"> S</label>
+                        <label><input type="checkbox" name="size" value="M"> M</label>
+                        <label><input type="checkbox" name="size" value="L"> L</label>
+                        <label><input type="checkbox" name="size" value="XL"> XL</label>
+                        <label><input type="checkbox" name="size" value="XXL"> XXL</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Color</h4>
+                        <label><input type="checkbox" name="color" value="black"> Black</label>
+                        <label><input type="checkbox" name="color" value="blue"> Blue</label>
+                        <label><input type="checkbox" name="color" value="white"> White</label>
+                        <label><input type="checkbox" name="color" value="grey"> Grey</label>
+                        <label><input type="checkbox" name="color" value="green"> Green</label>
+                        <label><input type="checkbox" name="color" value="red"> Red</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Customer Rating</h4>
+                        <label><input type="radio" name="rating" value="4+"> 4★ & above</label>
+                        <label><input type="radio" name="rating" value="3+"> 3★ & above</label>
+                    </div>
+
+                    <button class="btn btn-primary apply-filters-btn" onclick="applyFilters()">Apply Filters</button>
+                    <button class="btn btn-outline clear-filters-btn" onclick="clearFilters()">Clear All</button>
+                </aside>
+
+                <!-- Content Area -->
+                <div class="content">
+                    <!-- T-Shirts Section -->
+                    <section class="category-section" id="tshirts" data-category="tshirts">
+                        <h3>T-Shirts</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="499" data-rating="4.5" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Blue Crew Neck T-Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Blue Crew Neck T-Shirt', 499, 'https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Basic Blue Crew Neck T-Shirt</h4>
+                                    <div class="rating">★★★★★ (4.5)</div>
+                                    <div class="price">₹499</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="699" data-rating="4.2" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Black Graphic T-Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Black Graphic T-Shirt', 699, 'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Stylish Black Graphic T-Shirt</h4>
+                                    <div class="rating">★★★★☆ (4.2)</div>
+                                    <div class="price">₹699</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="549" data-rating="4.0" data-color="white">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's White Polo T-Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s White Polo T-Shirt', 549, 'https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Classic White Polo T-Shirt</h4>
+                                    <div class="rating">★★★★☆ (4.0)</div>
+                                    <div class="price">₹549</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Shirts Section -->
+                    <section class="category-section" id="shirts" data-category="shirts">
+                        <h3>Shirts</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="1299" data-rating="4.7" data-color="white">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1010531/pexels-photo-1010531.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's White Formal Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s White Formal Shirt', 1299, 'https://images.pexels.com/photos/1010531/pexels-photo-1010531.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Crisp White Formal Shirt</h4>
+                                    <div class="rating">★★★★★ (4.7)</div>
+                                    <div class="price">₹1,299</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="999" data-rating="4.3" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/159846/pexels-photo-159846.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Casual Blue Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Casual Blue Shirt', 999, 'https://images.pexels.com/photos/159846/pexels-photo-159846.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Casual Denim Blue Shirt</h4>
+                                    <div class="rating">★★★★☆ (4.3)</div>
+                                    <div class="price">₹999</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="1499" data-rating="4.6" data-color="grey">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1187974/pexels-photo-1187974.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Grey Check Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Grey Check Shirt', 1499, 'https://images.pexels.com/photos/1187974/pexels-photo-1187974.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Premium Grey Check Shirt</h4>
+                                    <div class="rating">★★★★★ (4.6)</div>
+                                    <div class="price">₹1,499</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Jeans Section -->
+                    <section class="category-section" id="jeans" data-category="jeans">
+                        <h3>Jeans</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="1899" data-rating="4.4" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1039869/pexels-photo-1039869.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Dark Blue Slim Fit Jeans">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Dark Blue Slim Fit Jeans', 1899, 'https://images.pexels.com/photos/1039869/pexels-photo-1039869.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Dark Blue Slim Fit Jeans</h4>
+                                    <div class="rating">★★★★☆ (4.4)</div>
+                                    <div class="price">₹1,899</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="1699" data-rating="4.1" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/2034079/pexels-photo-2034079.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Black Distressed Jeans">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Black Distressed Jeans', 1699, 'https://images.pexels.com/photos/2034079/pexels-photo-2034079.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Black Distressed Denim Jeans</h4>
+                                    <div class="rating">★★★★☆ (4.1)</div>
+                                    <div class="price">₹1,699</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="2199" data-rating="4.5" data-color="grey">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1721558/pexels-photo-1721558.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Grey Ripped Jeans">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Grey Ripped Jeans', 2199, 'https://images.pexels.com/photos/1721558/pexels-photo-1721558.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Stylish Grey Ripped Jeans</h4>
+                                    <div class="rating">★★★★★ (4.5)</div>
+                                    <div class="price">₹2,199</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Trousers Section -->
+                    <section class="category-section" id="trousers" data-category="trousers">
+                        <h3>Trousers</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="1499" data-rating="4.6" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/428340/pexels-photo-428340.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Black Formal Trousers">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Black Formal Trousers', 1499, 'https://images.pexels.com/photos/428340/pexels-photo-428340.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Elegant Black Formal Trousers</h4>
+                                    <div class="rating">★★★★★ (4.6)</div>
+                                    <div class="price">₹1,499</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="1199" data-rating="4.2" data-color="grey">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/4906109/pexels-photo-4906109.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Grey Chinos">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Grey Chinos', 1199, 'https://images.pexels.com/photos/4906109/pexels-photo-4906109.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Comfortable Grey Chinos</h4>
+                                    <div class="rating">★★★★☆ (4.2)</div>
+                                    <div class="price">₹1,199</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="1349" data-rating="4.0" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/4906110/pexels-photo-4906110.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Navy Blue Trousers">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Navy Blue Trousers', 1349, 'https://images.pexels.com/photos/4906110/pexels-photo-4906110.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Classic Navy Blue Trousers</h4>
+                                    <div class="rating">★★★★☆ (4.0)</div>
+                                    <div class="price">₹1,349</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Blazers Section -->
+                    <section class="category-section" id="blazers" data-category="blazers">
+                        <h3>Blazers</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="2999" data-rating="4.8" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/3771089/pexels-photo-3771089.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Black Formal Blazer">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Black Formal Blazer', 2999, 'https://images.pexels.com/photos/3771089/pexels-photo-3771089.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Sophisticated Black Blazer</h4>
+                                    <div class="rating">★★★★★ (4.8)</div>
+                                    <div class="price">₹2,999</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="2799" data-rating="4.5" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/3771092/pexels-photo-3771092.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Navy Blue Casual Blazer">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Navy Blue Casual Blazer', 2799, 'https://images.pexels.com/photos/3771092/pexels-photo-3771092.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Casual Navy Blue Blazer</h4>
+                                    <div class="rating">★★★★★ (4.5)</div>
+                                    <div class="price">₹2,799</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="3299" data-rating="4.7" data-color="grey">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/3771091/pexels-photo-3771091.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Grey Tweed Blazer">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Grey Tweed Blazer', 3299, 'https://images.pexels.com/photos/3771091/pexels-photo-3771091.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Premium Grey Tweed Blazer</h4>
+                                    <div class="rating">★★★★★ (4.7)</div>
+                                    <div class="price">₹3,299</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Suits Section -->
+                    <section class="category-section" id="suits" data-category="suits">
+                        <h3>Suits</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="7999" data-rating="4.9" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1055743/pexels-photo-1055743.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Black Three-Piece Suit">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Black Three-Piece Suit', 7999, 'https://images.pexels.com/photos/1055743/pexels-photo-1055743.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Classic Black Three-Piece Suit</h4>
+                                    <div class="rating">★★★★★ (4.9)</div>
+                                    <div class="price">₹7,999</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="6999" data-rating="4.7" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1020757/pexels-photo-1020757.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Navy Blue Two-Piece Suit">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Navy Blue Two-Piece Suit', 6999, 'https://images.pexels.com/photos/1020757/pexels-photo-1020757.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Stylish Navy Blue Two-Piece Suit</h4>
+                                    <div class="rating">★★★★★ (4.7)</div>
+                                    <div class="price">₹6,999</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="8499" data-rating="4.8" data-color="grey">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/2034078/pexels-photo-2034078.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Grey Slim Fit Suit">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Grey Slim Fit Suit', 8499, 'https://images.pexels.com/photos/2034078/pexels-photo-2034078.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Modern Grey Slim Fit Suit</h4>
+                                    <div class="rating">★★★★★ (4.8)</div>
+                                    <div class="price">₹8,499</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Traditional Wear Section -->
+                    <section class="category-section" id="traditional" data-category="traditional">
+                        <h3>Traditional Wear</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="2499" data-rating="4.5" data-color="cream">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/3389020/pexels-photo-3389020.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Cream Kurta Set">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Cream Kurta Set', 2499, 'https://images.pexels.com/photos/3389020/pexels-photo-3389020.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Elegant Cream Kurta Set</h4>
+                                    <div class="rating">★★★★★ (4.5)</div>
+                                    <div class="price">₹2,499</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="3499" data-rating="4.6" data-color="maroon">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/3389021/pexels-photo-3389021.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Maroon Sherwani">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Maroon Sherwani', 3499, 'https://images.pexels.com/photos/3389021/pexels-photo-3389021.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Rich Maroon Sherwani</h4>
+                                    <div class="rating">★★★★★ (4.6)</div>
+                                    <div class="price">₹3,499</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="1899" data-rating="4.3" data-color="white">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/3389022/pexels-photo-3389022.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's White Dhoti Kurta">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s White Dhoti Kurta', 1899, 'https://images.pexels.com/photos/3389022/pexels-photo-3389022.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Traditional White Dhoti Kurta</h4>
+                                    <div class="rating">★★★★☆ (4.3)</div>
+                                    <div class="price">₹1,899</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Activewear Section -->
+                    <section class="category-section" id="activewear" data-category="activewear">
+                        <h3>Activewear</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="899" data-rating="4.4" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1557008/pexels-photo-1557008.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Black Joggers">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Black Joggers', 899, 'https://images.pexels.com/photos/1557008/pexels-photo-1557008.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Performance Black Joggers</h4>
+                                    <div class="rating">★★★★☆ (4.4)</div>
+                                    <div class="price">₹899</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="749" data-rating="4.0" data-color="grey">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1557009/pexels-photo-1557009.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Grey Training Shorts">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Grey Training Shorts', 749, 'https://images.pexels.com/photos/1557009/pexels-photo-1557009.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Comfortable Grey Training Shorts</h4>
+                                    <div class="rating">★★★★☆ (4.0)</div>
+                                    <div class="price">₹749</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="1099" data-rating="4.5" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1557010/pexels-photo-1557010.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Blue Sports Jacket">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Blue Sports Jacket', 1099, 'https://images.pexels.com/photos/1557010/pexels-photo-1557010.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Lightweight Blue Sports Jacket</h4>
+                                    <div class="rating">★★★★★ (4.5)</div>
+                                    <div class="price">₹1,099</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Footwear Section -->
+                    <section class="category-section" id="footwear" data-category="footwear">
+                        <h3>Footwear</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="2999" data-rating="4.7" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Black Formal Shoes">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Black Formal Shoes', 2999, 'https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Premium Black Formal Shoes</h4>
+                                    <div class="rating">★★★★★ (4.7)</div>
+                                    <div class="price">₹2,999</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="1999" data-rating="4.4" data-color="white">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/267320/pexels-photo-267320.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's White Sneakers">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s White Sneakers', 1999, 'https://images.pexels.com/photos/267320/pexels-photo-267320.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Stylish White Casual Sneakers</h4>
+                                    <div class="rating">★★★★☆ (4.4)</div>
+                                    <div class="price">₹1,999</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="1499" data-rating="4.2" data-color="brown">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/2421374/pexels-photo-2421374.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Brown Loafers">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Brown Loafers', 1499, 'https://images.pexels.com/photos/2421374/pexels-photo-2421374.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Comfortable Brown Leather Loafers</h4>
+                                    <div class="rating">★★★★☆ (4.2)</div>
+                                    <div class="price">₹1,499</div>
+                                    <a href="men_productdetail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About iLooks</h4>
+                    <p>Your premier destination for men's fashion. We offer the finest collection of modern and traditional clothing.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">Sale</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Pinterest</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 iLooks Men's Fashion. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+        let cartTotal = 0;
+
+        // Cart functionality
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            showNotification();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotalElement = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+                cartCount.textContent = '0';
+                cartTotalElement.textContent = '0';
+                checkoutBtn.disabled = true;
+            } else {
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h5>${item.name}</h5>
+                            <div class="cart-item-price">₹${item.price} x ${item.quantity}</div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">×</button>
+                    </div>
+                `).join('');
+                
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                cartCount.textContent = totalItems;
+                cartTotalElement.textContent = cartTotal;
+                checkoutBtn.disabled = false;
+            }
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function proceedToCheckout() {
+            // Store cart data in localStorage
+            localStorage.setItem('cartData', JSON.stringify(cart));
+            localStorage.setItem('cartTotal', cartTotal.toString());
+            
+            // Redirect to checkout page (assuming you have a checkout.html)
+            window.location.href = 'checkout.html';
+        }
+
+        // Cart sidebar toggle
+        document.getElementById('cartIcon').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.add('active');
+            document.getElementById('cartOverlay').classList.add('active');
+        });
+
+        document.getElementById('closeCart').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.remove('active');
+            document.getElementById('cartOverlay').classList.remove('active');
+        });
+
+        document.getElementById('cartOverlay').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.remove('active');
+            document.getElementById('cartOverlay').classList.remove('active');
+        });
+
+        // Filter functionality
+        function applyFilters() {
+            const categoryFilters = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(cb => cb.value);
+            const priceFilter = document.querySelector('input[name="price"]:checked')?.value;
+            const sizeFilters = Array.from(document.querySelectorAll('input[name="size"]:checked')).map(cb => cb.value);
+            const colorFilters = Array.from(document.querySelectorAll('input[name="color"]:checked')).map(cb => cb.value);
+            const ratingFilter = document.querySelector('input[name="rating"]:checked')?.value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            const allProducts = document.querySelectorAll('.product-card');
+            const allSections = document.querySelectorAll('.category-section');
+
+            // Hide all sections first
+            allSections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            allProducts.forEach(product => {
+                let showProduct = true;
+                const productSection = product.closest('.category-section');
+                const productCategory = productSection.dataset.category;
+                const productPrice = parseInt(product.dataset.price);
+                const productRating = parseFloat(product.dataset.rating);
+                const productColor = product.dataset.color; // Assuming color is set in data-color attribute
+                const productName = product.querySelector('h4').textContent.toLowerCase();
+
+                // Category filter
+                if (categoryFilters.length > 0 && !categoryFilters.includes(productCategory)) {
+                    showProduct = false;
+                }
+
+                // Price filter
+                if (priceFilter && showProduct) {
+                    const [min, max] = priceFilter.split('-').map(p => p.replace('+', ''));
+                    const minPrice = parseInt(min);
+                    const maxPrice = max ? parseInt(max) : Infinity;
+                    
+                    if (productPrice < minPrice || productPrice > maxPrice) {
+                        showProduct = false;
+                    }
+                }
+
+                // Size filter (not implemented in women.html for product cards, but keeping structure if needed)
+                // If you add data-size to product cards, uncomment and adjust this logic
+                // if (sizeFilters.length > 0 && !sizeFilters.some(s => product.dataset.size.includes(s))) {
+                //     showProduct = false;
+                // }
+
+                // Color filter
+                if (colorFilters.length > 0 && !colorFilters.includes(productColor)) {
+                    showProduct = false;
+                }
+
+                // Rating filter
+                if (ratingFilter && showProduct) {
+                    const minRating = parseFloat(ratingFilter.replace('+', ''));
+                    if (productRating < minRating) {
+                        showProduct = false;
+                    }
+                }
+
+                // Search filter
+                if (searchTerm && !productName.includes(searchTerm)) {
+                    showProduct = false;
+                }
+
+                // Show/hide product
+                if (showProduct) {
+                    product.style.display = 'block';
+                    productSection.style.display = 'block'; // Show parent section if product is visible
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+
+            // Hide sections with no visible products after filtering
+            allSections.forEach(section => {
+                const visibleProducts = section.querySelectorAll('.product-card[style*="block"], .product-card:not([style*="none"])');
+                if (visibleProducts.length === 0) {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        function clearFilters() {
+            // Clear all filter inputs
+            document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+                input.checked = false;
+            });
+            document.getElementById('searchInput').value = '';
+
+            // Show all products and sections
+            document.querySelectorAll('.product-card').forEach(product => {
+                product.style.display = 'block';
+            });
+            document.querySelectorAll('.category-section').forEach(section => {
+                section.style.display = 'block';
+            });
+        }
+
+        // Search functionality - live search
+        document.getElementById('searchInput').addEventListener('input', function() {
+            applyFilters();
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartDisplay();
+        });
+    </script>
+</body>
+</html>

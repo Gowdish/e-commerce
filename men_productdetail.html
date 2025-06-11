@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iLooks - Men's Fashion Product Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../e-commerce/static/css/men_productdetail.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            margin: 0;
+            background: #fafafa;
+        }
+        .header {
+            background: #111;
+            color: #fff;
+            width: 100%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 70px;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .nav-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 2rem;
+        }
+        .brand-link {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3498db; /* Changed from #E91E63 to blue */
+            text-decoration: none;
+            letter-spacing: 1px;
+            margin-bottom: 0.1rem;
+        }
+        .brand-desc {
+            font-size: 0.9rem;
+            color: #ccc;
+            font-weight: 400;
+            margin-left: 2px;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+            flex: 1 1 auto;
+            justify-content: center;
+        }
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 0.7rem;
+            border-radius: 4px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .nav-menu a:hover,
+        .nav-menu a:focus {
+            background: #3498db; /* Changed from #E91E63 to blue */
+            color: #fff;
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        .search-box input {
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            border: none;
+            background: #222;
+            color: #fff;
+            font-size: 1rem;
+            width: 180px;
+            transition: background 0.2s;
+        }
+        .search-box input:focus {
+            outline: none;
+            background: #333;
+        }
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: #3498db; /* Changed from #E91E63 to blue */
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            border: 2px solid #111;
+        }
+        .btn.razorpay-btn {
+            width: 100%;
+            margin-top: 1.2rem;
+            font-size: 1.1rem;
+            padding: 0.8rem 0;
+            background: linear-gradient(90deg, #3498db, #2980b9); /* Adjusted gradient to blue tones */
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn.razorpay-btn:hover {
+            background: linear-gradient(90deg, #2980b9, #3498db); /* Adjusted gradient to blue tones */
+        }
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+        }
+        /* Modal */
+        .buy-now-modal {
+            display: none;
+            position: fixed;
+            z-index: 2100;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            width: 95%;
+            max-width: 420px;
+            padding: 2rem 2rem 1.5rem 2rem;
+            animation: fadeInModal 0.3s;
+        }
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: translate(-50%, -60%);}
+            to   { opacity: 1; transform: translate(-50%, -50%);}
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+        .modal-header h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #3498db; /* Changed from #E91E63 to blue */
+            margin: 0;
+        }
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #888;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .modal-form label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            color: #333;
+        }
+        .modal-form input[type="text"],
+        .modal-form input[type="tel"],
+        .modal-form textarea {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 0.3rem;
+            margin-bottom: 0.7rem;
+            font-size: 1rem;
+            background: #fafafa;
+            transition: border 0.2s;
+        }
+        .modal-form textarea {
+            min-height: 48px;
+            resize: vertical;
+        }
+        .modal-form input:focus,
+        .modal-form textarea:focus {
+            border: 1.5px solid #3498db; /* Changed from #E91E63 to blue */
+            outline: none;
+        }
+        .delivery-type, .existing-address {
+            margin-bottom: 1.2rem;
+        }
+        .delivery-type h4, .existing-address h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+            color: #3498db; /* Changed from #E91E63 to blue */
+        }
+        .delivery-type label, .existing-address label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.98rem;
+            cursor: pointer;
+        }
+        .delivery-type small {
+            color: #888;
+            font-size: 0.85rem;
+            margin-left: 0.5rem;
+        }
+        .btn.modal-continue {
+            width: 100%;
+            margin-top: 1.2rem;
+            font-size: 1.1rem;
+            padding: 0.8rem 0;
+        }
+        @media (max-width: 900px) {
+            .header-flex {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.7rem;
+            }
+            .nav-actions {
+                justify-content: center;
+                margin-top: 0.5rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .buy-now-modal {
+                padding: 1rem 0.5rem 1rem 0.5rem;
+            }
+        }
+    </style>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-flex">
+            <div class="nav-brand">
+                <a href="men.html" class="brand-link">iLooks</a>
+                <span class="brand-desc">Men's Fashion</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#tshirts">T-Shirts</a>
+                <a href="#shirts">Shirts</a>
+                <a href="#jeans">Jeans</a>
+                <a href="#trousers">Trousers</a>
+                <a href="#blazers">Blazers</a>
+                <a href="#suits">Suits</a>
+                <a href="#traditional">Traditional</a>
+                <a href="#activewear">Activewear</a>
+                <a href="#footwear">Footwear</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search products..." id="searchInput">
+                </div>
+                <div class="cart-icon" id="cartIcon">
+                    <span class="cart-count" id="cartCount">0</span>
+                    🛍️
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="product-detail-main">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="men.html">Home</a> / <span>Product Details</span>
+            </div>
+
+            <div class="product-detail-layout">
+                <div class="product-images">
+                    <div class="main-image">
+                        <img id="mainProductImage" src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Product Image">
+                    </div>
+                    <div class="thumbnail-images">
+                        <img class="thumbnail active" src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Product Thumbnail 1">
+                        <img class="thumbnail" src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Product Thumbnail 2">
+                        <img class="thumbnail" src="https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Product Thumbnail 3">
+                        <img class="thumbnail" src="https://images.pexels.com/photos/1010531/pexels-photo-1010531.jpeg?auto=compress&cs=tinysrgb&w=150" alt="Product Thumbnail 4">
+                    </div>
+                </div>
+
+                <div class="product-info">
+                    <h1 id="productName">Men's Classic Blue Shirt</h1>
+                    <div class="product-rating">
+                        <div class="stars">★★★★★</div>
+                        <span class="rating-count">(4.6) - 98 reviews</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price" id="productPrice">₹1,599</span>
+                        <span class="original-price">₹2,499</span>
+                        <span class="discount">36% OFF</span>
+                    </div>
+
+                    <div class="product-description">
+                        <h3>Product Description</h3>
+                        <p>This classic blue shirt for men is made from premium cotton fabric, offering superior comfort and a stylish look. Perfect for casual outings or semi-formal events, it's a versatile addition to any wardrobe.</p>
+                    </div>
+
+                    <div class="product-options">
+                        <div class="size-selection">
+                            <h3>Available Sizes</h3>
+                            <div class="size-options">
+                                <input type="radio" id="size-s" name="size" value="S">
+                                <label for="size-s" class="size-label">S</label>
+                                
+                                <input type="radio" id="size-m" name="size" value="M" checked>
+                                <label for="size-m" class="size-label">M</label>
+                                
+                                <input type="radio" id="size-l" name="size" value="L">
+                                <label for="size-l" class="size-label">L</label>
+                                
+                                <input type="radio" id="size-xl" name="size" value="XL">
+                                <label for="size-xl" class="size-label">XL</label>
+                                
+                                <input type="radio" id="size-xxl" name="size" value="XXL">
+                                <label for="size-xxl" class="size-label">XXL</label>
+                            </div>
+                        </div>
+
+                        <div class="color-selection">
+                            <h3>Available Colors</h3>
+                            <div class="color-options">
+                                <input type="radio" id="color-blue" name="color" value="Blue" checked>
+                                <label for="color-blue" class="color-label" style="background-color: #3498db;"></label>
+                                
+                                <input type="radio" id="color-white" name="color" value="White">
+                                <label for="color-white" class="color-label" style="background-color: #f5f5f5; border: 1px solid #ccc;"></label>
+                                
+                                <input type="radio" id="color-black" name="color" value="Black">
+                                <label for="color-black" class="color-label" style="background-color: #333;"></label>
+                                
+                                <input type="radio" id="color-grey" name="color" value="Grey">
+                                <label for="color-grey" class="color-label" style="background-color: #7f8c8d;"></label>
+                            </div>
+                        </div>
+
+                        <div class="quantity-selection">
+                            <h3>Quantity</h3>
+                            <div class="quantity-controls">
+                                <button type="button" class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                <input type="number" id="quantity" value="1" min="1" max="10" readonly>
+                                <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="btn btn-primary buy-now-btn" id="buyNowRazorpay">Buy Now</button>
+                        <button class="btn btn-outline add-to-cart-btn">Add to Cart</button>
+                        <button class="btn btn-wishlist">♡ Add to Wishlist</button>
+                    </div>
+
+                    <div class="product-features">
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li>✓ Premium quality cotton fabric</li>
+                            <li>✓ Comfortable and breathable</li>
+                            <li>✓ Modern slim fit design</li>
+                            <li>✓ Easy to maintain</li>
+                            <li>✓ Durable stitching</li>
+                            <li>✓ Available in multiple sizes and colors</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="description-panel">Description</button>
+                    <button class="tab-btn" data-tab="reviews-panel">Reviews</button>
+                    <button class="tab-btn" data-tab="shipping-panel">Shipping Info</button>
+                    <button class="tab-btn" data-tab="size-guide-panel">Size Guide</button>
+                </div>
+
+                <div id="description-panel" class="tab-panel active">
+                    <p>This men's classic blue shirt is a wardrobe essential, blending style with comfort. Crafted from a soft and durable cotton blend, it's designed to keep you comfortable throughout the day. The shirt features a modern cut, a classic collar, and buttoned cuffs, making it suitable for various occasions, from a casual day out to a semi-formal gathering. Pair it with jeans for a relaxed look or trousers for a more polished ensemble. Easy to care for and built to last, this shirt will quickly become your go-to option.</p>
+                </div>
+
+                <div id="reviews-panel" class="tab-panel">
+                    <div class="reviews-section">
+                        <h2>Customer Reviews</h2>
+                        <div class="reviews-summary">
+                            <div class="rating-overview">
+                                <div class="overall-rating">
+                                    <span class="rating-number">4.6</span>
+                                    <div class="rating-stars">★★★★★</div>
+                                    <span class="total-reviews">Based on 98 reviews</span>
+                                </div>
+                                <div class="rating-breakdown">
+                                    <div class="rating-bar">
+                                        <span>5 ★</span>
+                                        <div class="bar"><div class="fill" style="width: 85%;"></div></div>
+                                    </div>
+                                    <div class="rating-bar">
+                                        <span>4 ★</span>
+                                        <div class="bar"><div class="fill" style="width: 10%;"></div></div>
+                                    </div>
+                                    <div class="rating-bar">
+                                        <span>3 ★</span>
+                                        <div class="bar"><div class="fill" style="width: 3%;"></div></div>
+                                    </div>
+                                    <div class="rating-bar">
+                                        <span>2 ★</span>
+                                        <div class="bar"><div class="fill" style="width: 1%;"></div></div>
+                                    </div>
+                                    <div class="rating-bar">
+                                        <span>1 ★</span>
+                                        <div class="bar"><div class="fill" style="width: 1%;"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="individual-reviews">
+                            <div class="review">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <strong>Rahul Sharma</strong>
+                                        <span class="review-rating">★★★★★</span>
+                                    </div>
+                                    <span class="review-date">May 20, 2025</span>
+                                </div>
+                                <div class="review-content">
+                                    <p>Excellent shirt! The fabric is very comfortable, and the fit is perfect. I've received many compliments. Highly recommend for both casual and formal wear.</p>
+                                </div>
+                            </div>
+                            <div class="review">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <strong>Priya Singh</strong>
+                                        <span class="review-rating">★★★★☆</span>
+                                    </div>
+                                    <span class="review-date">May 15, 2025</span>
+                                </div>
+                                <div class="review-content">
+                                    <p>Good quality shirt for the price. The color is exactly as shown. Only wish it was a little more breathable for summer. Overall happy with the purchase.</p>
+                                </div>
+                            </div>
+                            <div class="review">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <strong>Amit Kumar</strong>
+                                        <span class="review-rating">★★★★★</span>
+                                    </div>
+                                    <span class="review-date">May 10, 2025</span>
+                                </div>
+                                <div class="review-content">
+                                    <p>Fantastic shirt! It feels premium and looks great. The sizing was accurate. Will definitely buy more colors.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline load-more-reviews">Load More Reviews</button>
+                    </div>
+                </div>
+
+                <div id="shipping-panel" class="tab-panel">
+                    <div class="shipping-info">
+                        <h3>Shipping Information</h3>
+                        <p>We strive to deliver your orders as quickly as possible. Here are our shipping details:</p>
+                        <ul>
+                            <li><strong>Standard Shipping:</strong> Estimated delivery in 5-7 business days. Free on all orders above ₹999.</li>
+                            <li><strong>Express Shipping:</strong> Estimated delivery in 2-3 business days. Additional charges apply.</li>
+                            <li>Orders are processed within 1-2 business days.</li>
+                            <li>You will receive a tracking number via email once your order is shipped.</li>
+                            <li>Currently, we ship only within India.</li>
+                        </ul>
+                        <p>For more details, please refer to our <a href="#" style="color: #3498db;">Shipping Policy</a>.</p>
+                    </div>
+                </div>
+
+                <div id="size-guide-panel" class="tab-panel">
+                    <div class="size-guide">
+                        <h3>Size Guide - Men's Shirts</h3>
+                        <div class="size-chart">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Size</th>
+                                        <th>Chest (inches)</th>
+                                        <th>Shoulder (inches)</th>
+                                        <th>Sleeve (inches)</th>
+                                        <th>Length (inches)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>S</td>
+                                        <td>38-40</td>
+                                        <td>17.5</td>
+                                        <td>24</td>
+                                        <td>28</td>
+                                    </tr>
+                                    <tr>
+                                        <td>M</td>
+                                        <td>40-42</td>
+                                        <td>18</td>
+                                        <td>25</td>
+                                        <td>29</td>
+                                    </tr>
+                                    <tr>
+                                        <td>L</td>
+                                        <td>42-44</td>
+                                        <td>18.5</td>
+                                        <td>26</td>
+                                        <td>30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>XL</td>
+                                        <td>44-46</td>
+                                        <td>19</td>
+                                        <td>27</td>
+                                        <td>31</td>
+                                    </tr>
+                                    <tr>
+                                        <td>XXL</td>
+                                        <td>46-48</td>
+                                        <td>19.5</td>
+                                        <td>27.5</td>
+                                        <td>32</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="size-tips">
+                            <h4>How to Measure:</h4>
+                            <ul>
+                                <li><strong>Chest:</strong> Measure around the fullest part of your chest, keeping the tape horizontal.</li>
+                                <li><strong>Shoulder:</strong> Measure straight across the back from shoulder seam to shoulder seam.</li>
+                                <li><strong>Sleeve:</strong> Measure from the top of the shoulder seam to the cuff.</li>
+                                <li><strong>Length:</strong> Measure from the highest point of the shoulder to the bottom hem of the shirt.</li>
+                            </ul>
+                            <p><em>All measurements are in inches. Please allow for a tolerance of +/- 0.5 inches.</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="related-products">
+                <h3>You Might Also Like</h3>
+                <div class="related-grid">
+                    <div class="related-item">
+                        <img src="https://images.pexels.com/photos/1055743/pexels-photo-1055743.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Related Product 1">
+                        <h4>Black Formal Trousers</h4>
+                        <div class="price">₹1,399</div>
+                    </div>
+                    <div class="related-item">
+                        <img src="https://images.pexels.com/photos/1020757/pexels-photo-1020757.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Related Product 2">
+                        <h4>Grey Casual Shirt</h4>
+                        <div class="price">₹999</div>
+                    </div>
+                    <div class="related-item">
+                        <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Related Product 3">
+                        <h4>Brown Leather Loafers</h4>
+                        <div class="price">₹2,499</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+   <!-- ...existing code above... -->
+<footer class="footer" style="background:#111; color:#fff; margin-top:2rem; padding-top:2rem;">
+    <div class="container" style="max-width:1200px; margin:0 auto; padding:0 1rem;">
+        <div class="footer-content" style="display:flex; flex-wrap:wrap; gap:2rem; justify-content:space-between;">
+            <div class="footer-section" style="flex:1 1 220px; min-width:220px;">
+                <h4 style="color:#3498db; font-size:1.2rem; margin-bottom:0.7rem;">About iLooks</h4>
+                <p style="color:#ccc; font-size:0.98rem; line-height:1.7;">
+                    Your premier destination for men's fashion. Discover the latest trends in shirts, jeans, suits, and more. Quality, comfort, and style delivered to your door.
+                </p>
+            </div>
+            <div class="footer-section" style="flex:1 1 160px; min-width:160px;">
+                <h4 style="color:#3498db; font-size:1.1rem; margin-bottom:0.7rem;">Customer Service</h4>
+                <ul style="list-style:none; padding:0; margin:0;">
+                    <li><a href="#" style="color:#fff; text-decoration:none; display:block; margin-bottom:0.4rem;">Contact Us</a></li>
+                    <li><a href="#" style="color:#fff; text-decoration:none; display:block; margin-bottom:0.4rem;">Size Guide</a></li>
+                    <li><a href="#" style="color:#fff; text-decoration:none; display:block; margin-bottom:0.4rem;">Returns & Exchanges</a></li>
+                    <li><a href="#" style="color:#fff; text-decoration:none; display:block;">Shipping Info</a></li>
+                </ul>
+            </div>
+            <div class="footer-section" style="flex:1 1 160px; min-width:160px;">
+                <h4 style="color:#3498db; font-size:1.1rem; margin-bottom:0.7rem;">Quick Links</h4>
+                <ul style="list-style:none; padding:0; margin:0;">
+                    <li><a href="#" style="color:#fff; text-decoration:none; display:block; margin-bottom:0.4rem;">New Arrivals</a></li>
+                    <li><a href="#" style="color:#fff; text-decoration:none; display:block; margin-bottom:0.4rem;">Best Sellers</a></li>
+                    <li><a href="#" style="color:#fff; text-decoration:none; display:block; margin-bottom:0.4rem;">Sale</a></li>
+                    <li><a href="#" style="color:#fff; text-decoration:none; display:block;">Gift Cards</a></li>
+                </ul>
+            </div>
+            <div class="footer-section" style="flex:1 1 180px; min-width:180px;">
+                <h4 style="color:#3498db; font-size:1.1rem; margin-bottom:0.7rem;">Connect With Us</h4>
+                <div class="social-links" style="display:flex; gap:1rem; margin-top:0.5rem;">
+                    <a href="#" aria-label="Facebook" style="color:#fff; font-size:1.4rem;"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.5 9.95v-7.05h-2.1v-2.9h2.1V9.5c0-2.07 1.23-3.22 3.12-3.22c.9 0 1.84.16 1.84.16v2.02h-1.04c-1.03 0-1.35.64-1.35 1.3v1.56h2.3l-.37 2.9h-1.93v7.05A10 10 0 0 0 22 12z"/></svg></a>
+                    <a href="#" aria-label="Instagram" style="color:#fff; font-size:1.4rem;"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.75a5.75 5.75 0 1 1-5.75 5.75A5.75 5.75 0 0 1 12 6.25zm0 1.5a4.25 4.25 0 1 0 4.25 4.25A4.25 4.25 0 0 0 12 7.75zm5.5-.75a1 1 0 1 1-1 1a1 1 0 0 1 1-1z"/></svg></a>
+                    <a href="#" aria-label="Twitter" style="color:#fff; font-size:1.4rem;"><svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M22 5.92a8.19 8.19 0 0 1-2.36.65a4.13 4.13 0 0 0 1.81-2.27a8.28 8.28 0 0 1-2.61 1a4.13 4.13 0 0 0-7.04 3.76A11.7 11.7 0 0 1 3.1 4.86a4.13 4.13 0 0 0 1.28 5.51a4.07 4.07 0 0 1-1.87-.52v.05a4.13 4.13 0 0 0 3.31 4.05a4.09 4.09 0 0 1-1.86.07a4.13 4.13 0 0 0 3.85 2.86A8.29 8.29 0 0 1 2 19.54a11.7 11.7 0 0 0 6.29 1.84c7.55 0 11.69-6.26 11.69-11.69c0-.18 0-.36-.01-.54A8.18 8.18 0 0 0 22 5.92z"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="border-top:1px solid #222; margin-top:2rem; padding:1rem 0; text-align:center; color:#aaa; font-size:0.98rem;">
+            &copy; 2025 iLooks Men's Fashion. All rights reserved.
+        </div>
+    </div>
+</footer>
+<!-- ...existing code below... -->
+
+    <script>
+        // Image gallery functionality
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const mainImage = document.getElementById('mainProductImage');
+
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                thumbnails.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                mainImage.src = this.src.replace('w=150', 'w=600');
+            });
+        });
+
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const targetTab = this.getAttribute('data-tab');
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanels.forEach(panel => panel.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Quantity controls
+        function increaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue < 10) {
+                quantityInput.value = currentValue + 1;
+            }
+        }
+
+        function decreaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        }
+
+        // Size selection highlighting
+        const sizeLabels = document.querySelectorAll('.size-label');
+        sizeLabels.forEach(label => {
+            label.addEventListener('click', function() {
+                sizeLabels.forEach(l => l.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Color selection highlighting
+        const colorLabels = document.querySelectorAll('.color-label');
+        colorLabels.forEach(label => {
+            label.addEventListener('click', function() {
+                colorLabels.forEach(l => l.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Add to cart functionality
+        document.querySelector('.add-to-cart-btn').addEventListener('click', function() {
+            const selectedSize = document.querySelector('input[name="size"]:checked').value;
+            const selectedColor = document.querySelector('input[name="color"]:checked').value;
+            const quantity = document.getElementById('quantity').value;
+            const productName = document.getElementById('productName').textContent;
+            const productPrice = document.getElementById('productPrice').textContent;
+            // Using a custom message box instead of alert
+            showCustomAlert(`Added to cart:\n${productName}\nSize: ${selectedSize}\nColor: ${selectedColor}\nQuantity: ${quantity}\nPrice: ${productPrice}`);
+        });
+
+        // Razorpay Buy Now integration
+        document.getElementById('buyNowRazorpay').addEventListener('click', function(e) {
+            e.preventDefault();
+            const productName = document.getElementById('productName').textContent;
+            const productPriceText = document.getElementById('productPrice').textContent.replace(/[^\d]/g, '');
+            const productPrice = parseInt(productPriceText, 10) || 1299; // Default if parsing fails
+            const selectedSize = document.querySelector('input[name="size"]:checked').value;
+            const selectedColor = document.querySelector('input[name="color"]:checked').value;
+            const quantity = parseInt(document.getElementById('quantity').value, 10);
+
+            const totalAmount = productPrice * quantity * 100; // Razorpay expects paise
+
+            var options = {
+                "key": "rzp_test_1DP5mmOlF5G5ag", // Replace with your Razorpay Test Key
+                "amount": totalAmount,
+                "currency": "INR",
+                "name": "iLooks",
+                "description": productName + " (" + selectedSize + ", " + selectedColor + ")",
+                "handler": function (response){
+                    showCustomAlert("Payment successful! Payment ID: " + response.razorpay_payment_id);
+                    // Optionally redirect to a thank you/order confirmation page
+                },
+                "prefill": {
+                    "name": "", // Pre-fill with user's name if available
+                    "email": "", // Pre-fill with user's email if available
+                    "contact": "" // Pre-fill with user's contact if available
+                },
+                "theme": {
+                    "color": "#3498db" // Changed from #E91E63 to blue
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        });
+
+        // Custom alert function (replaces window.alert)
+        function showCustomAlert(message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '50%';
+            alertDiv.style.left = '50%';
+            alertDiv.style.transform = 'translate(-50%, -50%)';
+            alertDiv.style.backgroundColor = '#333';
+            alertDiv.style.color = 'white';
+            alertDiv.style.padding = '20px';
+            alertDiv.style.borderRadius = '10px';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+            alertDiv.style.maxWidth = '300px';
+            alertDiv.style.textAlign = 'center';
+            alertDiv.style.fontFamily = 'sans-serif';
+            alertDiv.style.fontSize = '1rem';
+            alertDiv.innerHTML = `
+                <p style="margin-bottom: 15px; white-space: pre-wrap;">${message}</p>
+                <button onclick="this.parentNode.remove()" style="background-color: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">OK</button>
+            `;
+            document.body.appendChild(alertDiv);
+        }
+    </script>
+</body>
+</html>

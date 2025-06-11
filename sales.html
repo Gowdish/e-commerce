@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iLooks - Sales & Offers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../e-commerce/static/css/sales.css">
+</head>
+<body>
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="close-cart" id="closeCart">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="btn btn-primary checkout-btn" id="checkoutBtn" disabled onclick="proceedToCheckout()">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Product added to cart successfully!
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <h1><a href="#" style="color: #e74c3c; text-decoration: none;">iLooks</a></h1>
+                <p>Limited Time Offers</p>
+            </div>
+            <nav class="nav-menu">
+                <a href="#womens-sale">Women's Sale</a>
+                <a href="#mens-sale">Men's Sale</a>
+                <a href="#flash-deals">Flash Deals</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search products..." id="searchInput">
+                </div>
+                <div class="cart-icon" id="cartIcon">
+                    <span class="cart-count" id="cartCount">0</span>
+                    🛍️
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="hero-section">
+                <h2>Mega Savings Event!</h2>
+                <p>Don't miss out on incredible discounts on your favorite fashion items!</p>
+            </div>
+
+            <div class="layout">
+                <!-- Filters Sidebar -->
+                <aside class="filters">
+                    <h3>Filter by Offer</h3>
+                    
+                    <div class="filter-group">
+                        <h4>Discount Percentage</h4>
+                        <label><input type="radio" name="offer" value="20"> 20% & above</label>
+                        <label><input type="radio" name="offer" value="30"> 30% & above</label>
+                        <label><input type="radio" name="offer" value="50"> 50% & above</label>
+                        <label><input type="radio" name="offer" value="70"> 70% & above</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Price Range (Discounted)</h4>
+                        <label><input type="radio" name="price" value="0-1000"> Under ₹1000</label>
+                        <label><input type="radio" name="price" value="1000-3000"> ₹1000 - ₹3000</label>
+                        <label><input type="radio" name="price" value="3000-5000"> ₹3000 - ₹5000</label>
+                        <label><input type="radio" name="price" value="5000+"> Above ₹5000</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Gender</h4>
+                        <label><input type="radio" name="gender" value="women"> Women</label>
+                        <label><input type="radio" name="gender" value="men"> Men</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Category</h4>
+                        <label><input type="checkbox" name="category" value="dresses"> Dresses</label>
+                        <label><input type="checkbox" name="category" value="tops"> Tops/Shirts</label>
+                        <label><input type="checkbox" name="category" value="bottoms"> Bottoms</label>
+                        <label><input type="checkbox" name="category" value="outerwear"> Outerwear</label>
+                    </div>
+
+                    <button class="btn btn-primary apply-filters-btn" onclick="applyFilters()">Apply Filters</button>
+                    <button class="btn btn-outline clear-filters-btn" onclick="clearFilters()">Clear All</button>
+                </aside>
+
+                <!-- Content Area -->
+                <div class="content">
+                    <!-- Women's Sale Section -->
+                    <section class="category-section" id="womens-sale" data-category="womens-sale" data-gender="women">
+                        <h3>Women's Sale Items</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="900" data-original-price="1800" data-offer="50" data-gender="women" data-category="dresses">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Summer Maxi Dress">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Summer Maxi Dress', 900, 'https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Summer Maxi Dress</h4>
+                                    <div class="offer-tag">50% OFF</div>
+                                    <div class="price">₹900 <span class="original-price">₹1,800</span></div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="1050" data-original-price="1500" data-offer="30" data-gender="women" data-category="tops">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1488975/pexels-photo-1488975.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Floral Blouse">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Floral Blouse', 1050, 'https://images.pexels.com/photos/1488975/pexels-photo-1488975.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Chic Floral Blouse</h4>
+                                    <div class="offer-tag">30% OFF</div>
+                                    <div class="price">₹1,050 <span class="original-price">₹1,500</span></div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="2500" data-original-price="5000" data-offer="50" data-gender="women" data-category="outerwear">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1239923/pexels-photo-1239923.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Winter Coat">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Stylish Winter Coat', 2500, 'https://images.pexels.com/photos/1239923/pexels-photo-1239923.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Stylish Winter Coat</h4>
+                                    <div class="offer-tag">50% OFF</div>
+                                    <div class="price">₹2,500 <span class="original-price">₹5,000</span></div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Men's Sale Section -->
+                    <section class="category-section" id="mens-sale" data-category="mens-sale" data-gender="men">
+                        <h3>Men's Sale Items</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="1200" data-original-price="2400" data-offer="50" data-gender="men" data-category="tops">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Casual Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Casual Shirt', 1200, 'https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Men's Casual Shirt</h4>
+                                    <div class="offer-tag">50% OFF</div>
+                                    <div class="price">₹1,200 <span class="original-price">₹2,400</span></div>
+                                    <a href="menproduct-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="1800" data-original-price="3000" data-offer="40" data-gender="men" data-category="bottoms">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Slim Fit Jeans">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Slim Fit Jeans', 1800, 'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Men's Slim Fit Jeans</h4>
+                                    <div class="offer-tag">40% OFF</div>
+                                    <div class="price">₹1,800 <span class="original-price">₹3,000</span></div>
+                                    <a href="menproduct-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="4000" data-original-price="8000" data-offer="50" data-gender="men" data-category="outerwear">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/2034078/pexels-photo-2034078.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Blazer">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Formal Blazer', 4000, 'https://images.pexels.com/photos/2034078/pexels-photo-2034078.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Men's Formal Blazer</h4>
+                                    <div class="offer-tag">50% OFF</div>
+                                    <div class="price">₹4,000 <span class="original-price">₹8,000</span></div>
+                                    <a href="menproduct-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Flash Deals Section -->
+                    <section class="category-section" id="flash-deals" data-category="flash-deals" data-gender="all">
+                        <h3>Flash Deals (Limited Stock!)</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="600" data-original-price="2000" data-offer="70" data-gender="women" data-category="dresses">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/291760/pexels-photo-291760.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Evening Mini Dress">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Evening Mini Dress', 600, 'https://images.pexels.com/photos/291760/pexels-photo-291760.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Chic Evening Mini Dress</h4>
+                                    <div class="offer-tag">70% OFF!</div>
+                                    <div class="price">₹600 <span class="original-price">₹2,000</span></div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="450" data-original-price="900" data-offer="50" data-gender="men" data-category="tops">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Men's Graphic Tee">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Men\'s Graphic Tee', 450, 'https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Cool Graphic Tee</h4>
+                                    <div class="offer-tag">50% OFF!</div>
+                                    <div class="price">₹450 <span class="original-price">₹900</span></div>
+                                    <a href="menproduct-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                            <div class="product-card" data-price="1500" data-original-price="5000" data-offer="70" data-gender="women" data-category="bottoms">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/3386861/pexels-photo-3386861.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Designer Skirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Designer Skirt', 1500, 'https://images.pexels.com/photos/3386861/pexels-photo-3386861.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Elegant Pleated Skirt</h4>
+                                    <div class="offer-tag">70% OFF!</div>
+                                    <div class="price">₹1,500 <span class="original-price">₹5,000</span></div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About iLooks Sales</h4>
+                    <p>Grab the best deals on fashion for men and women. Limited stock, unlimited style!</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Sale Policy</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Today's Deals</a></li>
+                        <li><a href="#">Clearance</a></li>
+                        <li><a href="#">Top Rated Sales</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Pinterest</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 iLooks Sales & Offers. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+        let cartTotal = 0;
+
+        // Cart functionality
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            showNotification();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotalElement = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+                cartCount.textContent = '0';
+                cartTotalElement.textContent = '0';
+                checkoutBtn.disabled = true;
+            } else {
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h5>${item.name}</h5>
+                            <div class="cart-item-price">₹${item.price} x ${item.quantity}</div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">×</button>
+                    </div>
+                `).join('');
+                
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                cartCount.textContent = totalItems;
+                cartTotalElement.textContent = cartTotal;
+                checkoutBtn.disabled = false;
+            }
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function proceedToCheckout() {
+            localStorage.setItem('cartData', JSON.stringify(cart));
+            localStorage.setItem('cartTotal', cartTotal.toString());
+            window.location.href = 'checkout.html'; // Assuming a generic checkout page
+        }
+
+        // Cart sidebar toggle
+        document.getElementById('cartIcon').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.add('active');
+            document.getElementById('cartOverlay').classList.add('active');
+        });
+
+        document.getElementById('closeCart').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.remove('active');
+            document.getElementById('cartOverlay').classList.remove('active');
+        });
+
+        document.getElementById('cartOverlay').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.remove('active');
+            document.getElementById('cartOverlay').classList.remove('active');
+        });
+
+        // Filter functionality
+        function applyFilters() {
+            const offerFilter = document.querySelector('input[name="offer"]:checked')?.value; // New offer filter
+            const priceFilter = document.querySelector('input[name="price"]:checked')?.value;
+            const genderFilter = document.querySelector('input[name="gender"]:checked')?.value;
+            const categoryFilters = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(cb => cb.value);
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            const allProducts = document.querySelectorAll('.product-card');
+            const allSections = document.querySelectorAll('.category-section');
+
+            // Hide all sections first
+            allSections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            allProducts.forEach(product => {
+                let showProduct = true;
+                const productSection = product.closest('.category-section');
+                const productOffer = parseInt(product.dataset.offer);
+                const productPrice = parseInt(product.dataset.price);
+                const productGender = product.dataset.gender;
+                const productCategory = product.dataset.category;
+                const productName = product.querySelector('h4').textContent.toLowerCase();
+
+                // Offer filter
+                if (offerFilter && productOffer < parseInt(offerFilter)) {
+                    showProduct = false;
+                }
+
+                // Price filter
+                if (priceFilter && showProduct) {
+                    const [min, max] = priceFilter.split('-').map(p => p.replace('+', ''));
+                    const minPrice = parseInt(min);
+                    const maxPrice = max ? parseInt(max) : Infinity;
+                    
+                    if (productPrice < minPrice || productPrice > maxPrice) {
+                        showProduct = false;
+                    }
+                }
+
+                // Gender filter
+                if (genderFilter && showProduct) {
+                    if (productGender !== 'all' && productGender !== genderFilter) { // 'all' gender for flash deals
+                        showProduct = false;
+                    }
+                }
+
+                // Category filter
+                if (categoryFilters.length > 0 && !categoryFilters.includes(productCategory)) {
+                    showProduct = false;
+                }
+
+                // Search filter
+                if (searchTerm && !productName.includes(searchTerm)) {
+                    showProduct = false;
+                }
+
+                // Show/hide product
+                if (showProduct) {
+                    product.style.display = 'block';
+                    productSection.style.display = 'block'; // Show parent section if product is visible
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+
+            // Hide sections with no visible products after filtering
+            allSections.forEach(section => {
+                const visibleProducts = section.querySelectorAll('.product-card[style*="block"], .product-card:not([style*="none"])');
+                if (visibleProducts.length === 0) {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        function clearFilters() {
+            // Clear all filter inputs
+            document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+                input.checked = false;
+            });
+            document.getElementById('searchInput').value = '';
+
+            // Show all products and sections
+            document.querySelectorAll('.product-card').forEach(product => {
+                product.style.display = 'block';
+            });
+            document.querySelectorAll('.category-section').forEach(section => {
+                section.style.display = 'block';
+            });
+        }
+
+        // Search functionality - live search
+        document.getElementById('searchInput').addEventListener('input', function() {
+            applyFilters();
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartDisplay();
+            applyFilters(); // Apply filters on page load to show all initially
+        });
+    </script>
+</body>
+</html>

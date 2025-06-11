@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iLooks - Women's Fashion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../e-commerce/static/css/style.css">
+    
+</head>
+<body>
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="close-cart" id="closeCart">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">Your cart is empty</div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="btn btn-primary checkout-btn" id="checkoutBtn" disabled onclick="proceedToCheckout()">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Product added to cart successfully!
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <h1><a href="#" style="color: #E91E63; text-decoration: none;">iLooks</a></h1>
+                <p>Women's Fashion</p>
+            </div>
+            <nav class="nav-menu">
+                <a href="#chudithars">Chudithars</a>
+                <a href="#lehengas">Lehengas</a>
+                <a href="#pants">Pants</a>
+                <a href="#shalls">Shalls</a>
+                <a href="#tshirts">T-Shirts</a>
+                <a href="#partywear">Partywear</a>
+                <a href="#nighties">Nighties</a>
+                <a href="#sarees">Sarees</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search products..." id="searchInput">
+                </div>
+                <div class="cart-icon" id="cartIcon">
+                    <span class="cart-count" id="cartCount">0</span>
+                    🛍️
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="hero-section">
+                <h2>Discover Your Perfect Style</h2>
+                <p>Explore our exquisite collection of women's fashion</p>
+            </div>
+
+            <div class="layout">
+                <!-- Filters Sidebar -->
+                <aside class="filters">
+                    <h3>Filters</h3>
+                    
+                    <div class="filter-group">
+                        <h4>Category</h4>
+                        <label><input type="checkbox" name="category" value="chudithars"> Chudithars</label>
+                        <label><input type="checkbox" name="category" value="lehengas"> Lehengas</label>
+                        <label><input type="checkbox" name="category" value="pants"> Pants</label>
+                        <label><input type="checkbox" name="category" value="shalls"> Shalls</label>
+                        <label><input type="checkbox" name="category" value="tshirts"> T-Shirts</label>
+                        <label><input type="checkbox" name="category" value="partywear"> Partywear</label>
+                        <label><input type="checkbox" name="category" value="nighties"> Nighties</label>
+                        <label><input type="checkbox" name="category" value="sarees"> Sarees</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Price Range</h4>
+                        <label><input type="radio" name="price" value="0-500"> Under ₹500</label>
+                        <label><input type="radio" name="price" value="500-1000"> ₹500 - ₹1000</label>
+                        <label><input type="radio" name="price" value="1000-2000"> ₹1000 - ₹2000</label>
+                        <label><input type="radio" name="price" value="2000-5000"> ₹2000 - ₹5000</label>
+                        <label><input type="radio" name="price" value="5000+"> Above ₹5000</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Size</h4>
+                        <label><input type="checkbox" name="size" value="S"> S</label>
+                        <label><input type="checkbox" name="size" value="M"> M</label>
+                        <label><input type="checkbox" name="size" value="L"> L</label>
+                        <label><input type="checkbox" name="size" value="XL"> XL</label>
+                        <label><input type="checkbox" name="size" value="XXL"> XXL</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Color</h4>
+                        <label><input type="checkbox" name="color" value="red"> Red</label>
+                        <label><input type="checkbox" name="color" value="blue"> Blue</label>
+                        <label><input type="checkbox" name="color" value="green"> Green</label>
+                        <label><input type="checkbox" name="color" value="pink"> Pink</label>
+                        <label><input type="checkbox" name="color" value="black"> Black</label>
+                        <label><input type="checkbox" name="color" value="white"> White</label>
+                        <label><input type="checkbox" name="color" value="yellow"> Yellow</label>
+                        <label><input type="checkbox" name="color" value="purple"> Purple</label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Customer Rating</h4>
+                        <label><input type="radio" name="rating" value="4+"> 4★ & above</label>
+                        <label><input type="radio" name="rating" value="3+"> 3★ & above</label>
+                        <label><input type="radio" name="rating" value="2+"> 2★ & above</label>
+                        <label><input type="radio" name="rating" value="1+"> 1★ & above</label>
+                    </div>
+
+                    <button class="btn btn-primary apply-filters-btn" onclick="applyFilters()">Apply Filters</button>
+                    <button class="btn btn-outline clear-filters-btn" onclick="clearFilters()">Clear All</button>
+                </aside>
+
+                <!-- Content Area -->
+                <div class="content">
+                    <!-- Chudithars Section -->
+                    <section class="category-section" id="chudithars" data-category="chudithars">
+                        <h3>Chudithars</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="1299" data-rating="4.5" data-color="red">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Elegant Cotton Chudithar">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Elegant Cotton Chudithar', 1299, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Elegant Cotton Chudithar</h4>
+                                    <div class="rating">★★★★★ (4.5)</div>
+                                    <div class="price">₹1,299</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="1599" data-rating="4.2" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Designer Silk Chudithar">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Designer Silk Chudithar', 1599, 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Designer Silk Chudithar</h4>
+                                    <div class="rating">★★★★☆ (4.2)</div>
+                                    <div class="price">₹1,599</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="899" data-rating="4.0" data-color="green">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Floral Print Chudithar">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Floral Print Chudithar', 899, 'https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Floral Print Chudithar</h4>
+                                    <div class="rating">★★★★☆ (4.0)</div>
+                                    <div class="price">₹899</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="1199" data-rating="4.3" data-color="pink">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Embroidered Chudithar">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Embroidered Chudithar', 1199, 'https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Embroidered Chudithar</h4>
+                                    <div class="rating">★★★★☆ (4.3)</div>
+                                    <div class="price">₹1,199</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="749" data-rating="3.8" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Casual Daily Chudithar">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Casual Daily Chudithar', 749, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Casual Daily Chudithar</h4>
+                                    <div class="rating">★★★☆☆ (3.8)</div>
+                                    <div class="price">₹749</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Lehengas Section -->
+                    <section class="category-section" id="lehengas" data-category="lehengas">
+                        <h3>Lehengas</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="3999" data-rating="4.7" data-color="red">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Bridal Red Lehenga">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Bridal Red Lehenga', 3999, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Bridal Red Lehenga</h4>
+                                    <div class="rating">★★★★★ (4.7)</div>
+                                    <div class="price">₹3,999</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="2799" data-rating="4.4" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Designer Blue Lehenga">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Designer Blue Lehenga', 2799, 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Designer Blue Lehenga</h4>
+                                    <div class="rating">★★★★☆ (4.4)</div>
+                                    <div class="price">₹2,799</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="1999" data-rating="4.1" data-color="green">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Festive Green Lehenga">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Festive Green Lehenga', 1999, 'https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Festive Green Lehenga</h4>
+                                    <div class="rating">★★★★☆ (4.1)</div>
+                                    <div class="price">₹1,999</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="3299" data-rating="4.6" data-color="pink">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Embellished Pink Lehenga">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Embellished Pink Lehenga', 3299, 'https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Embellished Pink Lehenga</h4>
+                                    <div class="rating">★★★★★ (4.6)</div>
+                                    <div class="price">₹3,299</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="1599" data-rating="3.9" data-color="yellow">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Simple Yellow Lehenga">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Simple Yellow Lehenga', 1599, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Simple Yellow Lehenga</h4>
+                                    <div class="rating">★★★☆☆ (3.9)</div>
+                                    <div class="price">₹1,599</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Pants Section -->
+                    <section class="category-section" id="pants" data-category="pants">
+                        <h3>Pants</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="799" data-rating="4.2" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Formal Black Pants">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Formal Black Pants', 799, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Formal Black Pants</h4>
+                                    <div class="rating">★★★★☆ (4.2)</div>
+                                    <div class="price">₹799</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="599" data-rating="4.0" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Casual Blue Jeans">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Casual Blue Jeans', 599, 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Casual Blue Jeans</h4>
+                                    <div class="rating">★★★★☆ (4.0)</div>
+                                    <div class="price">₹599</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="699" data-rating="4.3" data-color="white">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400" alt="White Cotton Pants">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('White Cotton Pants', 699, 'https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>White Cotton Pants</h4>
+                                    <div class="rating">★★★★☆ (4.3)</div>
+                                    <div class="price">₹699</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="899" data-rating="4.1" data-color="green">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Palazzo Green Pants">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Palazzo Green Pants', 899, 'https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Palazzo Green Pants</h4>
+                                    <div class="rating">★★★★☆ (4.1)</div>
+                                    <div class="price">₹899</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="549" data-rating="3.8" data-color="red">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Casual Red Pants">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Casual Red Pants', 549, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Casual Red Pants</h4>
+                                    <div class="rating">★★★☆☆ (3.8)</div>
+                                    <div class="price">₹549</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Shalls Section -->
+                    <section class="category-section" id="shalls" data-category="shalls">
+                        <h3>Shalls</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="399" data-rating="4.4" data-color="pink">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Silk Pink Shawl">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Silk Pink Shawl', 399, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Silk Pink Shawl</h4>
+                                    <div class="rating">★★★★☆ (4.4)</div>
+                                    <div class="price">₹399</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="299" data-rating="4.1" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cotton Blue Shawl">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Cotton Blue Shawl', 299, 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Cotton Blue Shawl</h4>
+                                    <div class="rating">★★★★☆ (4.1)</div>
+                                    <div class="price">₹299</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="499" data-rating="4.5" data-color="white">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Embroidered White Shawl">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Embroidered White Shawl', 499, 'https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Embroidered White Shawl</h4>
+                                    <div class="rating">★★★★★ (4.5)</div>
+                                    <div class="price">₹499</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="349" data-rating="4.0" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Woolen Black Shawl">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Woolen Black Shawl', 349, 'https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Woolen Black Shawl</h4>
+                                    <div class="rating">★★★★☆ (4.0)</div>
+                                    <div class="price">₹349</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="449" data-rating="4.2" data-color="purple">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Designer Purple Shawl">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Designer Purple Shawl', 449, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Designer Purple Shawl</h4>
+                                    <div class="rating">★★★★☆ (4.2)</div>
+                                    <div class="price">₹449</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- T-Shirts Section -->
+                    <section class="category-section" id="tshirts" data-category="tshirts">
+                        <h3>T-Shirts</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="299" data-rating="4.3" data-color="white">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Basic White T-Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Basic White T-Shirt', 299, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Basic White T-Shirt</h4>
+                                    <div class="rating">★★★★☆ (4.3)</div>
+                                    <div class="price">₹299</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="399" data-rating="4.1" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Graphic Black T-Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Graphic Black T-Shirt', 399, 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Graphic Black T-Shirt</h4>
+                                    <div class="rating">★★★★☆ (4.1)</div>
+                                    <div class="price">₹399</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="349" data-rating="4.4" data-color="pink">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Trendy Pink T-Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Trendy Pink T-Shirt', 349, 'https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Trendy Pink T-Shirt</h4>
+                                    <div class="rating">★★★★☆ (4.4)</div>
+                                    <div class="price">₹349</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="449" data-rating="4.2" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Striped Blue T-Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Striped Blue T-Shirt', 449, 'https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Striped Blue T-Shirt</h4>
+                                    <div class="rating">★★★★☆ (4.2)</div>
+                                    <div class="price">₹449</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="329" data-rating="3.9" data-color="green">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Casual Green T-Shirt">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Casual Green T-Shirt', 329, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Casual Green T-Shirt</h4>
+                                    <div class="rating">★★★☆☆ (3.9)</div>
+                                    <div class="price">₹329</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Partywear Section -->
+                    <section class="category-section" id="partywear" data-category="partywear">
+                        <h3>Partywear</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="2499" data-rating="4.6" data-color="black">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Elegant Black Party Dress">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Elegant Black Party Dress', 2499, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Elegant Black Party Dress</h4>
+                                    <div class="rating">★★★★★ (4.6)</div>
+                                    <div class="price">₹2,499</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="1899" data-rating="4.3" data-color="red">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Glamorous Red Gown">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Glamorous Red Gown', 1899, 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Glamorous Red Gown</h4>
+                                    <div class="rating">★★★★☆ (4.3)</div>
+                                    <div class="price">₹1,899</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="2199" data-rating="4.5" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Sequined Blue Dress">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Sequined Blue Dress', 2199, 'https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Sequined Blue Dress</h4>
+                                    <div class="rating">★★★★★ (4.5)</div>
+                                    <div class="price">₹2,199</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="1699" data-rating="4.1" data-color="pink">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cocktail Pink Dress">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Cocktail Pink Dress', 1699, 'https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Cocktail Pink Dress</h4>
+                                    <div class="rating">★★★★☆ (4.1)</div>
+                                    <div class="price">₹1,699</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="2799" data-rating="4.7" data-color="white">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Designer White Gown">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Designer White Gown', 2799, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Designer White Gown</h4>
+                                    <div class="rating">★★★★★ (4.7)</div>
+                                    <div class="price">₹2,799</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Nighties Section -->
+                    <section class="category-section" id="nighties" data-category="nighties">
+                        <h3>Nighties</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="399" data-rating="4.2" data-color="pink">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Comfortable Pink Nightie">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Comfortable Pink Nightie', 399, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Comfortable Pink Nightie</h4>
+                                    <div class="rating">★★★★☆ (4.2)</div>
+                                    <div class="price">₹399</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="349" data-rating="4.0" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cotton Blue Nightie">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Cotton Blue Nightie', 349, 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Cotton Blue Nightie</h4>
+                                    <div class="rating">★★★★☆ (4.0)</div>
+                                    <div class="price">₹349</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="449" data-rating="4.4" data-color="white">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Silk White Nightie">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Silk White Nightie', 449, 'https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Silk White Nightie</h4>
+                                    <div class="rating">★★★★☆ (4.4)</div>
+                                    <div class="price">₹449</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="299" data-rating="3.8" data-color="green">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Printed Green Nightie">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Printed Green Nightie', 299, 'https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Printed Green Nightie</h4>
+                                    <div class="rating">★★★☆☆ (3.8)</div>
+                                    <div class="price">₹299</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="379" data-rating="4.1" data-color="purple">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Floral Purple Nightie">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Floral Purple Nightie', 379, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Floral Purple Nightie</h4>
+                                    <div class="rating">★★★★☆ (4.1)</div>
+                                    <div class="price">₹379</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Sarees Section -->
+                    <section class="category-section" id="sarees" data-category="sarees">
+                        <h3>Sarees</h3>
+                        <div class="product-grid">
+                            <div class="product-card" data-price="1999" data-rating="4.5" data-color="red">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Traditional Red Saree">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Traditional Red Saree', 1999, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Traditional Red Saree</h4>
+                                    <div class="rating">★★★★★ (4.5)</div>
+                                    <div class="price">₹1,999</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="2499" data-rating="4.6" data-color="blue">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Silk Blue Saree">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Silk Blue Saree', 2499, 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Silk Blue Saree</h4>
+                                    <div class="rating">★★★★★ (4.6)</div>
+                                    <div class="price">₹2,499</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="1599" data-rating="4.2" data-color="green">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Embroidered Green Saree">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Embroidered Green Saree', 1599, 'https://images.pexels.com/photos/1536620/pexels-photo-1536620.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Embroidered Green Saree</h4>
+                                    <div class="rating">★★★★☆ (4.2)</div>
+                                    <div class="price">₹1,599</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="3299" data-rating="4.8" data-color="pink">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Designer Pink Saree">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Designer Pink Saree', 3299, 'https://images.pexels.com/photos/1536621/pexels-photo-1536621.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Designer Pink Saree</h4>
+                                    <div class="rating">★★★★★ (4.8)</div>
+                                    <div class="price">₹3,299</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+
+                            <div class="product-card" data-price="1299" data-rating="4.0" data-color="yellow">
+                                <div class="product-image">
+                                    <img src="https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Cotton Yellow Saree">
+                                    <div class="product-overlay">
+                                        <button class="btn btn-primary" onclick="addToCart('Cotton Yellow Saree', 1299, 'https://images.pexels.com/photos/1375849/pexels-photo-1375849.jpeg?auto=compress&cs=tinysrgb&w=400')">Add to Cart</button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h4>Cotton Yellow Saree</h4>
+                                    <div class="rating">★★★★☆ (4.0)</div>
+                                    <div class="price">₹1,299</div>
+                                    <a href="product-detail.html" class="btn btn-outline">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About iLooks</h4>
+                    <p>Your premier destination for women's fashion. We offer the finest collection of traditional and modern clothing.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">Sale</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Pinterest</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 iLooks Women's Fashion. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let cart = [];
+        let cartTotal = 0;
+
+        // Cart functionality
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            showNotification();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotalElement = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+                cartCount.textContent = '0';
+                cartTotalElement.textContent = '0';
+                checkoutBtn.disabled = true;
+            } else {
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h5>${item.name}</h5>
+                            <div class="cart-item-price">₹${item.price} x ${item.quantity}</div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">×</button>
+                    </div>
+                `).join('');
+                
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                cartCount.textContent = totalItems;
+                cartTotalElement.textContent = cartTotal;
+                checkoutBtn.disabled = false;
+            }
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function proceedToCheckout() {
+            // Store cart data in localStorage
+            localStorage.setItem('cartData', JSON.stringify(cart));
+            localStorage.setItem('cartTotal', cartTotal.toString());
+            
+            // Redirect to checkout page
+            window.location.href = 'checkout.html';
+        }
+
+        // Cart sidebar toggle
+        document.getElementById('cartIcon').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.add('active');
+            document.getElementById('cartOverlay').classList.add('active');
+        });
+
+        document.getElementById('closeCart').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.remove('active');
+            document.getElementById('cartOverlay').classList.remove('active');
+        });
+
+        document.getElementById('cartOverlay').addEventListener('click', function() {
+            document.getElementById('cartSidebar').classList.remove('active');
+            document.getElementById('cartOverlay').classList.remove('active');
+        });
+
+        // Filter functionality
+        function applyFilters() {
+            const categoryFilters = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(cb => cb.value);
+            const priceFilter = document.querySelector('input[name="price"]:checked')?.value;
+            const sizeFilters = Array.from(document.querySelectorAll('input[name="size"]:checked')).map(cb => cb.value);
+            const colorFilters = Array.from(document.querySelectorAll('input[name="color"]:checked')).map(cb => cb.value);
+            const ratingFilter = document.querySelector('input[name="rating"]:checked')?.value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            const allProducts = document.querySelectorAll('.product-card');
+            const allSections = document.querySelectorAll('.category-section');
+
+            // Hide all sections first
+            allSections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            allProducts.forEach(product => {
+                let showProduct = true;
+                const productSection = product.closest('.category-section');
+                const productCategory = productSection.dataset.category;
+                const productPrice = parseInt(product.dataset.price);
+                const productRating = parseFloat(product.dataset.rating);
+                const productColor = product.dataset.color;
+                const productName = product.querySelector('h4').textContent.toLowerCase();
+
+                // Category filter
+                if (categoryFilters.length > 0 && !categoryFilters.includes(productCategory)) {
+                    showProduct = false;
+                }
+
+                // Price filter
+                if (priceFilter && showProduct) {
+                    const [min, max] = priceFilter.split('-').map(p => p.replace('+', ''));
+                    const minPrice = parseInt(min);
+                    const maxPrice = max ? parseInt(max) : Infinity;
+                    
+                    if (productPrice < minPrice || productPrice > maxPrice) {
+                        showProduct = false;
+                    }
+                }
+
+                // Color filter
+                if (colorFilters.length > 0 && !colorFilters.includes(productColor)) {
+                    showProduct = false;
+                }
+
+                // Rating filter
+                if (ratingFilter && showProduct) {
+                    const minRating = parseFloat(ratingFilter.replace('+', ''));
+                    if (productRating < minRating) {
+                        showProduct = false;
+                    }
+                }
+
+                // Search filter
+                if (searchTerm && !productName.includes(searchTerm)) {
+                    showProduct = false;
+                }
+
+                // Show/hide product
+                if (showProduct) {
+                    product.style.display = 'block';
+                    productSection.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+
+            // Hide sections with no visible products
+            allSections.forEach(section => {
+                const visibleProducts = section.querySelectorAll('.product-card[style*="block"], .product-card:not([style*="none"])');
+                if (visibleProducts.length === 0) {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        function clearFilters() {
+            // Clear all filter inputs
+            document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(input => {
+                input.checked = false;
+            });
+            document.getElementById('searchInput').value = '';
+
+            // Show all products and sections
+            document.querySelectorAll('.product-card').forEach(product => {
+                product.style.display = 'block';
+            });
+            document.querySelectorAll('.category-section').forEach(section => {
+                section.style.display = 'block';
+            });
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            applyFilters();
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartDisplay();
+        });
+    </script>
+</body>
+</html>
