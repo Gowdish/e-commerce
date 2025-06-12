@@ -18,6 +18,13 @@ body {
     padding: 0 20px;
 }
 
+/* Flexible Images */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Ensures images don't have extra space below them */
+}
+
 /* Header Styles */
 .header {
     background-color: #000;
@@ -640,26 +647,33 @@ body {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .hero-section {
         grid-column: span 1;
     }
-    
+
     .filters {
-        position: static;
-        order: -1;
+        position: static; /* Filters become static on tablets */
+        order: -1; /* Place filters above content */
+        max-height: unset; /* Remove max-height restriction */
+        overflow-y: visible; /* Make overflow visible */
     }
-    
+
     .filter-group {
         display: inline-block;
         margin-right: 2rem;
         margin-bottom: 1rem;
         vertical-align: top;
     }
-    
+
     .cart-sidebar {
         width: 350px;
         right: -350px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust for tablets */
+        gap: 1.5rem;
     }
 }
 
@@ -667,63 +681,72 @@ body {
     .header .container {
         flex-direction: column;
         gap: 1rem;
+        padding: 10px 20px; /* Add some padding */
     }
-    
+
+    .nav-brand {
+        margin-bottom: 1rem;
+    }
+
     .nav-menu {
-        flex-wrap: wrap;
+        flex-wrap: wrap; /* Allow navigation items to wrap */
         justify-content: center;
-        gap: 1rem;
+        width: 100%; /* Take full width */
+        margin-bottom: 1rem;
+        gap: 1rem; /* Adjust gap for smaller screens */
     }
-    
+
     .nav-actions {
-        flex-direction: column;
+        flex-direction: column; /* Stack search and cart icon */
+        width: 100%;
         gap: 0.5rem;
     }
-    
+
     .search-box input {
-        width: 250px;
+        width: 100%; /* Make search input full width */
+        max-width: 250px; /* Limit max width */
     }
-    
+
     .hero-section {
         padding: 2rem 1rem;
     }
-    
+
     .hero-section h2 {
         font-size: 2rem;
     }
-    
+
     .hero-section p {
         font-size: 1rem;
     }
-    
+
     .product-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 2-3 columns on smaller tablets */
         gap: 1.5rem;
     }
-    
+
     .category-section {
         padding: 1.5rem;
     }
-    
+
     .filters {
         padding: 1rem;
     }
-    
+
     .filter-group {
-        display: block;
+        display: block; /* Stack filter groups vertically */
         margin-right: 0;
     }
-    
+
     .footer-content {
         grid-template-columns: 1fr;
         gap: 1.5rem;
         text-align: center;
     }
-    
+
     .social-links {
         justify-content: center;
     }
-    
+
     .cart-sidebar {
         width: 300px;
         right: -300px;
@@ -734,56 +757,57 @@ body {
     .container {
         padding: 0 15px;
     }
-    
+
     .nav-menu {
         gap: 0.5rem;
     }
-    
+
     .nav-menu a {
         font-size: 0.9rem;
     }
-    
+
     .search-box input {
-        width: 200px;
+        width: 100%; /* Ensure search input is full width on small mobiles */
+        max-width: 200px; /* Adjust max-width */
     }
-    
+
     .hero-section h2 {
         font-size: 1.5rem;
     }
-    
+
     .hero-section p {
         font-size: 0.9rem;
     }
-    
+
     .product-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Single column on mobile phones */
     }
-    
+
     .category-section h3 {
         font-size: 1.5rem;
     }
-    
+
     .product-info {
         padding: 1rem;
     }
-    
+
     .btn {
         padding: 0.6rem 1.2rem;
         font-size: 0.8rem;
     }
-    
+
     .cart-sidebar {
         width: 280px;
         right: -280px;
     }
-    
+
     .notification {
         right: 10px;
         left: 10px;
         width: auto;
         transform: translateY(-100px);
     }
-    
+
     .notification.show {
         transform: translateY(0);
     }
